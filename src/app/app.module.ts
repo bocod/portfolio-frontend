@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileHeaderComponent,
     NavBarComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
