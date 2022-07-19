@@ -8,7 +8,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 const routes: Routes = [
   {path: '', component:HomeComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'profile', component:ProfileComponent}
+  {path: 'profile', component:ProfileComponent},
+  {path: '**', redirectTo: ''}
   // {path: '**', component: Pagina404Component}
 ];
 
