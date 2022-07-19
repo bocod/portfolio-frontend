@@ -1,6 +1,46 @@
 <app-nav-bar></app-nav-bar>
-<app-profile-header></app-profile-header>
-<app-about></app-about>
-<app-experience></app-experience>
-<app-skills></app-skills>
-<app-projects></app-projects>
+<div class="container">
+    <h1>Portfolio APP</h1>
+    <div id="carouselExampleCaptions" class="carousel slide col-lg-6 m-auto mb-3" data-bs-ride="false">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>See my work</h5>
+              <p>Some representative projects representing my style.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Check my profile</h5>
+              <p>If you'd like to look deeper, check my studies, courses and certifications.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Reach me!</h5>
+              <p>Have some questions? Feel free to send my a message.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    <div class="d-flex justify-content-evenly col-lg-6 m-auto">
+        <button type="button" [routerLink]="['profile']" class="btn btn-outline-primary">Check my profile</button>
+        <button type="button" class="btn btn-outline-secondary">Contact me!</button>
+    </div>
+</div>
