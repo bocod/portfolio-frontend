@@ -1,14 +1,37 @@
 <app-nav-bar></app-nav-bar>
-<form class="container col-lg-4">
+<form [formGroup]="loginForm" class="container col-lg-4">
+
     <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
+        <input type="email" formControlName="email" 
+        [ngClass]="{'is-invalid': Email?.errors && Email?.touched, 'is-valid': !Email?.errors && !Email?.touched}"
+        class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address <sup>*</sup></label>
     </div>
+
+    <div *ngIf="Email?.errors && Email?.touched">
+        <p *ngIf="Email?.hasError('required')" class="text-danger"><sup>*</sup> Email required</p>
+    </div>
+    <div *ngIf="Email?.errors && Email?.touched">
+        <p *ngIf="Email?.hasError('email')" class="text-danger">Email must be a valid email address</p>
+    </div>
+    
     <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
+        <input type="password" formControlName="password" class="form-control" 
+        [ngClass]="{'is-invalid': Password?.errors && Password?.touched, 'is-valid': !Password?.errors && !Password?.touched}"
+        id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password <sup>*</sup></label>
     </div>
+
+
+    <div *ngIf="Password?.errors && Password?.touched">
+        <p *ngIf="Password?.hasError('required')" class="text-danger"><sup>*</sup> Password required</p>
+    </div>
+    <div *ngIf="Password?.errors && Password?.touched">
+        <p *ngIf="Password?.hasError('minlength')" class="text-danger"><sup>*</sup> Password must have more than 8 characters</p>
+    </div>
+
     <div class="text-center mb-3">
         <button class="btn btn-primary w-50" type="submit">Login</button>
     </div>
+
 </form>
