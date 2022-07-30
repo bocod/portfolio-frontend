@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileHeaderService } from 'src/app/services/profile-header.service';
 
 @Component({
   selector: 'app-profile-header',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileHeaderComponent implements OnInit {
 
-  constructor() { }
+  myProfile:any;
+
+  constructor(private profileData: ProfileHeaderService) { }
 
   ngOnInit(): void {
+    this.profileData.getData().subscribe( data => {
+      console.log(data);
+      
+      console.log(`Datos personales: ${JSON.stringify(data)}`);
+      
+      console.log(`Nombre: ${JSON.stringify(data[0].firstname)}`);
+      
+      this.myProfile = data[0];
+    })
   }
 
 }
