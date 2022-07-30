@@ -13,6 +13,14 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/interceptor.service';
+import { EditComponent } from './components/editables/edit/edit.component';
+import { EditHeaderComponent } from './components/editables/edit-header/edit-header.component';
+import { EditAboutComponent } from './components/editables/edit-about/edit-about.component';
+import { EditExperienceComponent } from './components/editables/edit-experience/edit-experience.component';
+import { EditSkillsComponent } from './components/editables/edit-skills/edit-skills.component';
+import { EditProjectsComponent } from './components/editables/edit-projects/edit-projects.component';
 
 @NgModule({
   declarations: [
@@ -25,15 +33,24 @@ import { ProfileComponent } from './components/profile/profile.component';
     SkillsComponent,
     ProjectsComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditComponent,
+    EditHeaderComponent,
+    EditAboutComponent,
+    EditExperienceComponent,
+    EditSkillsComponent,
+    EditProjectsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

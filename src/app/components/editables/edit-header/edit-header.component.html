@@ -1,0 +1,69 @@
+<div class="container border rounded ps-0 pe-0 pb-3 mb-3">
+    <!-- bg img -->
+    <div class="overflow-hidden" id="profile-header-bg">
+        <img src="https://picsum.photos/1500/800" class="img-fluid rounded-top" alt="presentation background">
+    </div>
+    <div class="ps-3 d-flex justify-content-between flex-column flex-md-row">
+        <div>
+            <div class="d-flex flex-row align-items-end mb-3">
+                <!-- avatar -->
+                <div class="position-relative" id="avatar-container">
+                    <img
+                    src="https://picsum.photos/200/200"
+                    class="rounded-circle position-absolute top-0 start-0 translate-middle-y"
+                    alt="avatar"
+                    />
+                </div>
+                <!-- edit avatar -->
+                <i class="bi bi-pencil-square"></i>
+            </div>
+            <form>
+                <!-- avatar -->
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01">Avatar</label>
+                    <input type="file" class="form-control" id="inputGroupFile01" value="{{myProfile.avatar}}">
+                </div>
+                <!-- presentation -->
+                <!-- fullname -->
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{myProfile.firstname}}" name="firstname" required>
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Surname</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{myProfile.surname}}" name="surname" required>
+                </div>
+                
+                <!-- subtitle -->
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Subtitle</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{myProfile.subtitle}}" name="subtitle" required>
+                </div>
+
+                <!-- location & contact -->
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{myProfile.location}}" name="location" required>
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Contact</span>
+                    <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{{myProfile.contact}}" name="contact" required>
+                </div>
+                
+                <!-- buttons * 3 -->
+                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                <button type="button" class="btn btn-outline-secondary me-2">
+                    Add Section
+                </button>
+                <button type="button" class="btn btn-outline-secondary me-2">More...</button>
+            </form>
+        </div>
+        <!-- alma mater info -->
+        <div class="d-flex flex-column justify-content-center pe-3 mt-2 mt-md-0">
+            <div class="d-flex align-items-center mb-1">
+                <img src="https://picsum.photos/50/50" alt="study center logo" />
+                <p class="mb-0 ps-1">Jerberd</p>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+                <img src="https://picsum.photos/50/50" alt="study center logo" />
+                <p class="mb-0 ps-1">Universidad de Cronopios y de Famas</p>
+            </div>
+        </div>
+    </div>
+</div>

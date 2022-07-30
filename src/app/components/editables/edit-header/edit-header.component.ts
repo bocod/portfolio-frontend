@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileHeaderService } from 'src/app/services/profile-header.service';
 
 @Component({
-  selector: 'app-profile-header',
-  templateUrl: './profile-header.component.html',
-  styleUrls: ['./profile-header.component.css']
+  selector: 'app-edit-header',
+  templateUrl: './edit-header.component.html',
+  styleUrls: ['./edit-header.component.css']
 })
-export class ProfileHeaderComponent implements OnInit {
+export class EditHeaderComponent implements OnInit {
 
   myProfile:any;
 
