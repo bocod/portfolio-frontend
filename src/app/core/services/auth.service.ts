@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  uri = 'http://localhost:4200/api';
+  apiurl = 'http://localhost:8080/login';
   token: any;
 
   constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, password: string) {
-    this.http.post( this.uri + '/authenticate', { email: email, password: password } )
+    this.http.post( this.apiurl + '/authenticate', { email: email, password: password } )
         .subscribe((resp: any) => {
           //Redirect user to profile
           this.router.navigate(['profile']);
