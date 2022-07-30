@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<form [formGroup]="loginForm" class="container col-lg-4">
+<form [formGroup]="loginForm" class="container col-lg-4" (ngSubmit)="onSubmit($event)">
 
     <div class="form-floating mb-3">
         <input type="email" formControlName="email" 
