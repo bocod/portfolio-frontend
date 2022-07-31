@@ -12,6 +12,6 @@ export class ProfileHeaderService {
 
   getData():Observable<any> 
   {
-    return this.http.get<any>(this.url+"/view/profile");
+    return this.http.get<any>(this.url+"/profile/view");
   }
 }
