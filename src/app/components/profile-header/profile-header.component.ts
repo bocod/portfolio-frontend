@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileHeaderService } from 'src/app/services/profile-header.service';
+import { ProfileHeaderService } from 'src/app/services/profile-header/profile-header.service';
 
 @Component({
   selector: 'app-profile-header',

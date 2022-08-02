@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AboutService } from 'src/app/services/edit/about.service';
+import { AboutService } from 'src/app/services/about/about.service';
 
 @Component({
   selector: 'app-edit-about',
