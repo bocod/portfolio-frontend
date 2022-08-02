@@ -3,9 +3,12 @@
         <h2>About</h2>
         <i class="bi bi-pencil-square"></i>
     </div>
-    <div class="input-group">
-        <label for="about-text-area" class="input-group-text">Describe yourself</label>
-        <textarea class="form-control" aria-label="With textarea" id="about-text-area"></textarea>
-    </div>
+    <form [formGroup]="aboutForm" method="POST" action="/about/save" (ngSubmit)="onSubmit($event)">
+        <div class="input-group">
+            <label for="about-text-area" class="input-group-text">Describe yourself</label>
+            <textarea formControlName="about" name="about" class="form-control" aria-label="With textarea" id="about-text-area"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
     <!-- <p>{{myProfile.about}}</p> -->
 </div>

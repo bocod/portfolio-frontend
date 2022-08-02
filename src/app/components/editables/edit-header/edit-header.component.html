@@ -17,8 +17,9 @@
                 <!-- edit avatar -->
                 <i class="bi bi-pencil-square"></i>
             </div>
-            <form>
-                <!-- avatar -->
+
+            <form method="PUT" [action]="['/profile/put']" enctype="multipart/form-data">
+                <!-- avatar upload -->
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="inputGroupFile01">Avatar</label>
                     <input type="file" class="form-control" id="inputGroupFile01" value="{{myProfile.avatar}}">
@@ -47,7 +48,7 @@
                 </div>
                 
                 <!-- buttons * 3 -->
-                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                <button type="submit" value="Submit" class="btn btn-primary me-2">Submit</button>
                 <button type="button" class="btn btn-outline-secondary me-2">
                     Add Section
                 </button>

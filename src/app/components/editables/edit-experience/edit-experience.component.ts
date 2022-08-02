@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditExperienceComponent implements OnInit {
 
+  currentJob: boolean = false;
+  
+  
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  currentJobChange(event: any) {
+    this.currentJob = !this.currentJob
+  }
 }

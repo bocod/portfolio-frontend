@@ -4,8 +4,59 @@
             <h2>Experience</h2>
             <a role="button"><i class="bi bi-plus-circle fs-5"></i></a>
         </div>
-        <div class="d-flex justify-content-between m-3">
+        <div class="d-flex flex-column flex-lg-row justify-content-between m-3">
+            
+            <form class="d-flex flex-column" method="PUT" action="/experience/put" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="companyLogo">Logo</label>
+                    <input type="file" class="form-control" id="companyLogo" value="{`{myExperience.logo}}">
+                </div>
+
+                <div class="input-group input-group-default mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Role</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{${myExperience.role}}" name="role" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myExperience.company}" name="company" required>
+                    <!-- Add ngif selected value coming from db -->
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Working hours</option>
+                        <option value="1">Freelance</option>
+                        <option value="2">Full-Time</option>
+                        <option value="3">Part-Time</option>
+                        </select>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Starting date</span>
+                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myExperience.startingDate}}" name="startingDate" required>
+                    <ng-container *ngIf="!currentJob">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Ending date</span>
+                        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myExperience.endingDate}}" name="endingDate" required>
+                    </ng-container>
+                </div>
+                
+                <div class="form-check form-switch mb-3">
+                    <input [(ngModel)]="currentJob" (change)="currentJobChange($event)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Current job</label>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myExperience.location}}" name="location" required>
+                </div>
+                
+                <div>
+                    <button class="btn btn-primary mt-2">Submit</button>
+                </div>
+            </form>
+
+            <!-- Databinding preview? or old data??? -->
+
             <div class="d-flex align-items-start">
+                <!-- Company logo -->
                 <img src="https://picsum.photos/50/50" alt="Company logo">
                 <div class="ms-3">
                     <h3>Role</h3>
@@ -14,9 +65,10 @@
                     <p class="mb-1">City, Country</p>
                 </div>
             </div>
+
             <div>
                 <i class="bi bi-pencil-square ms-3"></i>
-                <i class="bi bi-trash3 ms-3"></i>
+                <a role="button" routerLink="/experience/delete/{`{myExperience.id}}"><i class="text-danger bi bi-trash3 ms-3"></i></a>
             </div>
         </div>
     </div>
@@ -25,7 +77,35 @@
             <h2>Education</h2>
             <i class="bi bi-plus-circle fs-5"></i>
         </div>
+        
         <div class="d-flex justify-content-between m-3">
+
+            <form class="d-flex flex-column" method="PUT" action="/education/put" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="instituteLogo">Logo</label>
+                    <input type="file" class="form-control" id="instituteLogo" value="{`{myEducation.logo}}">
+                </div>
+
+                <div class="input-group input-group-default mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Degree</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{${myEducation.degree}}" name="degree" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Institute</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myEducation.institute}" name="institute" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Ending date or expected</span>
+                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myEducation.endingDate}}" name="endingDate" required>
+                </div>
+                
+                <div>
+                    <button class="btn btn-primary mt-2">Submit</button>
+                </div>
+            </form>
+
             <div class="d-flex align-items-start">
                 <img src="https://picsum.photos/50/50" alt="Company logo">
                 <div class="ms-3">
@@ -40,6 +120,36 @@
             </div>
         </div>
         <div class="d-flex justify-content-between m-3">
+            
+            <!-- FORM -->
+            <form class="d-flex flex-column" method="PUT" action="/education/put" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="instituteLogo">Logo</label>
+                    <input type="file" class="form-control" id="instituteLogo" value="{`{myEducation.logo}}">
+                </div>
+
+                <div class="input-group input-group-default mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Degree</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{${myEducation.degree}}" name="degree" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Institute</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myEducation.institute}" name="institute" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Ending date or expected</span>
+                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="{`{myEducation.endingDate}}" name="endingDate" required>
+                </div>
+                <div>
+                    <button class="btn btn-primary mt-2">Submit</button>
+                </div>
+
+            </form>
+            <!-- END FORM -->
+
+
             <div class="d-flex align-items-start">
                 <img src="https://picsum.photos/50/50" alt="Company logo">
                 <div class="ms-3">
