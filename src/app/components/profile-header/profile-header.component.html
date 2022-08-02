@@ -4,13 +4,13 @@
         <img src="https://picsum.photos/1500/800" class="img-fluid rounded-top" alt="presentation background">
     </div>
     <div class="ps-3 d-flex justify-content-between flex-column flex-md-row">
-        <div>
+        <div *ngIf="myProfile">
             <div class="d-flex flex-row align-items-end">
                 <!-- avatar -->
                 <div class="position-relative" id="avatar-container">
                     <img
-                    src="https://picsum.photos/200/200"
-                    class="rounded-circle position-absolute top-0 start-0 translate-middle-y"
+                    [src]="myProfile.avatar"
+                    class="img-fluid rounded-circle position-absolute top-0 start-0 translate-middle-y"
                     alt="avatar"
                     />
                 </div>
