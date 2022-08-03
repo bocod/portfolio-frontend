@@ -21,6 +21,7 @@ import { EditAboutComponent } from './components/editables/edit-about/edit-about
 import { EditExperienceComponent } from './components/editables/edit-experience/edit-experience.component';
 import { EditSkillsComponent } from './components/editables/edit-skills/edit-skills.component';
 import { EditProjectsComponent } from './components/editables/edit-projects/edit-projects.component';
+import { EducationComponent } from './components/education/education.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { EditProjectsComponent } from './components/editables/edit-projects/edit
     EditAboutComponent,
     EditExperienceComponent,
     EditSkillsComponent,
-    EditProjectsComponent
+    EditProjectsComponent,
+    EducationComponent
   ],
   imports: [
     BrowserModule,
