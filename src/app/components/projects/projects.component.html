@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-between m-3" *ngFor="let project of myProjects">
         <div class="d-flex align-items-start">
             <div class="ms-3">
-                <a [href]="project.projectURL" class="text-decoration-none"><h3>{{project.name}}</h3></a>
+                <a [href]="project.projectURL" class="text-decoration-none" target="_blank" rel="noopener"><h3>{{project.name}}</h3></a>
                 <p class="mb-1">{{project.description}}</p>
             </div>
         </div>
