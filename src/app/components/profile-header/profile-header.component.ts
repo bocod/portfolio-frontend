@@ -14,11 +14,11 @@ export class ProfileHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileData.getData().subscribe( data => {
-      console.log(data);
+      // console.log(data);
       
-      console.log(`Datos personales: ${JSON.stringify(data)}`);
+      // console.log(`Datos personales: ${JSON.stringify(data)}`);
       
-      console.log(`Nombre: ${JSON.stringify(data[0].firstname)}`);
+      // console.log(`Nombre: ${JSON.stringify(data[0].firstname)}`);
       
       this.myProfile = data[0];
     })
