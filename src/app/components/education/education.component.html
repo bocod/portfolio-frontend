@@ -16,7 +16,7 @@
                     ·
                     <span *ngIf="education.certificateURL == null">Certificate Pending</span>
                     <span *ngIf="education.certificateURL">
-                        <a [routerLink]="education.certificateURL">Go to Certified diploma</a>
+                        <a [href]="education.certificateURL" target="_blank" rel="noopener">Certificate - Diploma</a>
                     </span>
                 </p>
                 <p class="mb-1">{{education.description}}</p>
