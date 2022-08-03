@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AboutService } from 'src/app/services/edit/about.service';
+import { AboutService } from 'src/app/services/about/about.service';
 
 @Component({
   selector: 'app-about',
@@ -14,7 +14,6 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.aboutData.getData().subscribe( data => {
-      console.log(data);
       
       this.myAbout = data[0]
     })

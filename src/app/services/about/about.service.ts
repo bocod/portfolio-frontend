@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AboutService {
-  url: string = "http://localhost:8080";
+  url: string = "http://localhost:8080/about";
 
   constructor(private http:HttpClient) { }
 
   getData():Observable<any> 
   {
-    return this.http.get<any>(this.url+"/about/view");
+    return this.http.get<any>(`${this.url}/view`);
   }
 
   // postData(data:any):Observable<any> 

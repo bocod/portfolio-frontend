@@ -1,57 +1,29 @@
-<div class="container border rounded pt-3 pb-1 mb-3">
-    <div>
+    <section *ngIf="myExperience">
         <div class="d-flex justify-content-between align-items-center">
             <h2>Experience</h2>
             <a role="button"><i class="bi bi-plus-circle fs-5"></i></a>
         </div>
-        <div class="d-flex justify-content-between m-3">
+        <article class="d-flex justify-content-between m-3" *ngFor="let experience of myExperience.reverse()">
             <div class="d-flex align-items-start">
-                <img src="https://picsum.photos/50/50" alt="Company logo">
+                <div id="logo">
+                    <img class="img-fluid" [src]="experience.logoURL" alt="Company logo"/>
+                </div>
                 <div class="ms-3">
-                    <h3>Role</h3>
-                    <p class="mb-1">Company - Working hours</p>
-                    <p class="mb-1">Starting date - Finishing date - Period</p>
-                    <p class="mb-1">City, Country</p>
+                    <h4 class="mb-0">{{experience.role}}</h4>
+                    <p class="mb-0">{{experience.company}} - {{experience.contract}}</p>
+                    <p class="mb-0 text-secondary">
+                        {{experience.start}} 
+                        - 
+                        {{experience.end != null ? experience.end : (experience.currentJob  ? "Current Job" : "")}} 
+                        · 
+                        {{calcElapsed(experience.end, experience.start)}}</p>
+                    <p class="mb-1 text-secondary">{{experience.location}}, Country</p>
+                    <p class="mb-1">{{experience.description}}</p>
                 </div>
             </div>
             <div>
                 <i class="bi bi-pencil-square ms-3"></i>
                 <i class="bi bi-trash3 ms-3"></i>
             </div>
-        </div>
-    </div>
-    <div>
-        <div class="d-flex justify-content-between align-items-center">
-            <h2>Education</h2>
-            <i class="bi bi-plus-circle fs-5"></i>
-        </div>
-        <div class="d-flex justify-content-between m-3">
-            <div class="d-flex align-items-start">
-                <img src="https://picsum.photos/50/50" alt="Company logo">
-                <div class="ms-3">
-                    <h3>Institute</h3>
-                    <p class="mb-1">Degree</p>
-                    <p class="mb-1">Starting date - Finishing date</p>
-                </div>
-            </div>
-            <div>
-                <i class="bi bi-pencil-square ms-3"></i>
-                <i class="bi bi-trash3 ms-3"></i>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between m-3">
-            <div class="d-flex align-items-start">
-                <img src="https://picsum.photos/50/50" alt="Company logo">
-                <div class="ms-3">
-                    <h3>Institute</h3>
-                    <p class="mb-1">Degree</p>
-                    <p class="mb-1">Starting date - Finishing date</p>
-                </div>
-            </div>
-            <div>
-                <i class="bi bi-pencil-square ms-3"></i>
-                <i class="bi bi-trash3 ms-3"></i>
-            </div>
-        </div>
-    </div>
-</div>
+        </article>
+    </section>
