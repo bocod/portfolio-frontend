@@ -1,7 +1,9 @@
 <section>
     <div class="d-flex justify-content-between align-items-center">
         <h2>Education</h2>
-        <i class="bi bi-plus-circle fs-5"></i>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#eduModal">
+            <i class="bi bi-plus-circle fs-5"></i>
+        </button>
     </div>
     <article class="d-flex justify-content-between m-3" *ngFor="let education of myEducation">
         <div class="d-flex align-items-start">
@@ -28,3 +30,53 @@
         </div>
     </article>
 </section>
+<div class="modal fade" id="eduModal" tabindex="-1" aria-labelledby="eduModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eduModalLabel">Add education</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="d-flex flex-column" method="XXX" action="/education/XXXX" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="instituteLogo">Logo</label>
+                    <input type="file" class="form-control" id="instituteLogo" name="logoURL">
+                </div>
+
+                <div class="input-group input-group-default mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Degree</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Master in Software Development" name="degree" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Institute</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: FreeCodeCamp" name="institute" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Ending date or expected</span>
+                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="end" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Certificate or Diploma</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: URL to Diploma" name="certificateURL">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+                    <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Stack used or learned, guided or self-guided, team-work or individual, methodologies, achievements" name="description"></textarea>
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+</div>

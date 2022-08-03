@@ -1,29 +1,94 @@
-    <section *ngIf="myExperience">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2>Experience</h2>
-            <a role="button"><i class="bi bi-plus-circle fs-5"></i></a>
+<section *ngIf="myExperience">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Experience</h2>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#expModal">
+            <i class="bi bi-plus-circle fs-5"></i>
+        </button>
+    </div>
+    <article class="d-flex justify-content-between m-3" *ngFor="let experience of myExperience.reverse()">
+        <div class="d-flex align-items-start">
+            <div id="logo">
+                <img class="img-fluid" [src]="experience.logoURL" alt="Company logo"/>
+            </div>
+            <div class="ms-3">
+                <h4 class="mb-0">{{experience.role}}</h4>
+                <p class="mb-0">{{experience.company}} - {{experience.contract}}</p>
+                <p class="mb-0 text-secondary">
+                    {{experience.start}} 
+                    - 
+                    {{experience.end != null ? experience.end : (experience.currentJob  ? "Current Job" : "")}} 
+                    · 
+                    {{calcElapsed(experience.end, experience.start)}}</p>
+                <p class="mb-1 text-secondary">{{experience.location}}, Country</p>
+                <p class="mb-1">{{experience.description}}</p>
+            </div>
         </div>
-        <article class="d-flex justify-content-between m-3" *ngFor="let experience of myExperience.reverse()">
-            <div class="d-flex align-items-start">
-                <div id="logo">
-                    <img class="img-fluid" [src]="experience.logoURL" alt="Company logo"/>
+        <div>
+            <i class="bi bi-pencil-square ms-3"></i>
+            <i class="bi bi-trash3 ms-3"></i>
+        </div>
+    </article>
+</section>
+<div class="modal fade" id="expModal" tabindex="-1" aria-labelledby="expModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="expModalLabel">Add experience</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="d-flex flex-column" method="XXXX" action="/experience/XXXX" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="companyLogo">Logo</label>
+                    <input type="file" class="form-control" id="companyLogo" name="logoURL">
                 </div>
-                <div class="ms-3">
-                    <h4 class="mb-0">{{experience.role}}</h4>
-                    <p class="mb-0">{{experience.company}} - {{experience.contract}}</p>
-                    <p class="mb-0 text-secondary">
-                        {{experience.start}} 
-                        - 
-                        {{experience.end != null ? experience.end : (experience.currentJob  ? "Current Job" : "")}} 
-                        · 
-                        {{calcElapsed(experience.end, experience.start)}}</p>
-                    <p class="mb-1 text-secondary">{{experience.location}}, Country</p>
-                    <p class="mb-1">{{experience.description}}</p>
+
+                <div class="input-group input-group-default mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Role</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Front End Web Developer" name="role" required>
                 </div>
-            </div>
-            <div>
-                <i class="bi bi-pencil-square ms-3"></i>
-                <i class="bi bi-trash3 ms-3"></i>
-            </div>
-        </article>
-    </section>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Blue Shine SRL" name="company" required>
+                    <!-- Add ngif selected value coming from db -->
+                    <select class="form-select" aria-label="Default select example" name="contract">
+                        <option selected>Working hours</option>
+                        <option value="1">Freelance</option>
+                        <option value="2">Full-Time</option>
+                        <option value="3">Part-Time</option>
+                    </select>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Starting date</span>
+                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="start" required>
+                    <ng-container *ngIf="!currentJob">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Ending date</span>
+                        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="end" required>
+                    </ng-container>
+                </div>
+                
+                <div class="form-check form-switch mb-3">
+                    <input [(ngModel)]="currentJob" (change)="currentJobChange($event)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Current job</label>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Argentina" name="location" required>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+                    <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Responsibilities, stack used or learned, team-work or individual, methodologies, achievements" name="description"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>

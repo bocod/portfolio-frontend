@@ -10,6 +10,8 @@ export class ExperienceComponent implements OnInit {
 
   myExperience: any;
   parseDate = Date.parse;
+  
+  currentJob: boolean = false;
 
 
   calcElapsed = (end:any, start:any) => {
@@ -29,6 +31,10 @@ export class ExperienceComponent implements OnInit {
       return elapsed;
     }
   };
+
+  currentJobChange(event: Event) {
+    this.currentJob = !this.currentJob
+  }
 
   constructor(private experienceData: ExperienceService) { }
 
