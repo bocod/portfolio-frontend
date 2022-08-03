@@ -14,7 +14,6 @@ export class SkillsComponent implements OnInit {
 
   ngOnInit(): void {
     this.skillsData.getData().subscribe(data => {
-      console.log(data);
 
       this.mySkills = data;
       

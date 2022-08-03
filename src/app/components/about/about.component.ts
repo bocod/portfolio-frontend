@@ -14,7 +14,6 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.aboutData.getData().subscribe( data => {
-      console.log(data);
       
       this.myAbout = data[0]
     })
