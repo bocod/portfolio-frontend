@@ -9,6 +9,7 @@ import { SkillsService } from 'src/app/services/skills/skills.service';
 export class SkillsComponent implements OnInit {
 
   mySkills: any;
+  skillLevel: any;
 
   constructor(private skillsData: SkillsService) { }
 
