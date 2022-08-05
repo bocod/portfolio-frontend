@@ -12,12 +12,17 @@
                 <p class="mb-1">{{project.description}}</p>
             </div>
         </div>
-        <div class="d-flex">
-            <i class="bi bi-pencil-square ms-3"></i>
-            <i class="bi bi-trash3 ms-3"></i>
+        <div class="d-flex align-items-start">
+            <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#projectPutModal" (click)="putProjectID(project.id!)">
+                <i class="bi bi-pen"></i>
+            </button>
+            <button type="button" class="btn text-danger" data-bs-toggle="modal" data-bs-target="#projectDeleteModal" (click)="delProjectID(project.id!)">
+                <i class="bi bi-trash3"></i>
+            </button>
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="projectsModal" tabindex="-1" aria-labelledby="projectsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -54,4 +59,57 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+<div class="modal fade" id="projectDeleteModal" tabindex="-1" aria-labelledby="projectDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger" id="projectDeleteModalLabel">Are you sure?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitDeleteProject()">
+                <div class="modal-body">
+                    <p *ngIf="projectFound">Your project <span class="fw-bold">{{projectFound.name}}</span> is going to be deleted...</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="projectPutModal" tabindex="-1" aria-labelledby="projectPutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="projectFound">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary" id="projectPutModalLabel">Edit</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitPutProject()">
+                <div class="modal-body">
+                    <div class="input-group input-group-default mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Project name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Banana web app" [(ngModel)]="projectFound.name" name="name" [value]="projectFound.name" required>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Project URL</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: URL to deployed site or repo" [(ngModel)]="projectFound.projectURL" name="projectURL" [value]="projectFound.projectURL">
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+                        <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Stack used or learned, guided or self-guided, team-work or individual, methodologies, achievements" [(ngModel)]="projectFound.description" name="description" [value]="projectFound.description"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
