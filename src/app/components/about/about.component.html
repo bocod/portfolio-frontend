@@ -1,7 +1,84 @@
 <div class="container border rounded pt-3 pb-1 mb-3">
     <div class="d-flex justify-content-between align-items-center">
         <h2>About</h2>
-        <i class="bi bi-pencil-square"></i>
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aboutCreateModal">
+            <i class="bi bi-plus-circle fs-5"></i>
+        </button>
     </div>
     <p *ngIf="myAbout">{{myAbout.about}}</p>
+    <div *ngIf="myAbout" class="d-flex">
+        <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#aboutPutModal" (click)="putAboutID(myAbout.id!)">
+            <i class="bi bi-pen"></i>
+        </button>
+        <button type="button" class="btn text-danger" data-bs-toggle="modal" data-bs-target="#aboutDeleteModal" (click)="delAboutID(myAbout.id!)">
+            <i class="bi bi-trash3"></i>
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="aboutCreateModal" tabindex="-1" aria-labelledby="aboutCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="aboutCreateModalLabel">Add About</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitNewAboutForm()">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label for="about-text-area" class="input-group-text">Describe yourself</label>
+                        <textarea [(ngModel)]="about.about" name="about" class="form-control" aria-label="With textarea" id="about-text-area"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="aboutFound" class="modal fade" id="aboutDeleteModal" tabindex="-1" aria-labelledby="aboutDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger" id="aboutDeleteModalLabel">Are you sure?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitDeleteAbout()">
+                <div class="modal-body">
+                    <p>Your about description <span class="fst-italic fw-lighter">"{{aboutFound.about}}"</span> is going to be deleted...</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div [ngStyle]="{display: aboutFound ? 'block':'none'}" class="modal fade" id="aboutPutModal" tabindex="-1" aria-labelledby="aboutPutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary" id="aboutPutModalLabel">Edit</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitPutAbout()">
+                <div class="modal-body">
+                    <div class="input-group" *ngIf="aboutFound">
+                        <label for="about-text-area" class="input-group-text">Describe yourself</label>
+                        <textarea [(ngModel)]="aboutFound.about" name="about" class="form-control" aria-label="With textarea" id="about-text-area" [value]="aboutFound.about"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
