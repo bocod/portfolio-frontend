@@ -18,11 +18,15 @@ export class SkillsComponent implements OnInit {
   constructor(private skServ: SkillsService, private router:Router) { }
 
   ngOnInit(): void {
-    this.skServ.getData().subscribe(data => {
-
-      this.mySkills = data;      
-      
-    })
+    this.skServ.getData().subscribe(
+      {
+        next: skillsData => {
+          console.log(`Skills found: ${skillsData}:  ${JSON.stringify(skillsData)}`);
+          this.mySkills = skillsData},
+        error: error => console.error(error),
+        complete: () => console.info("Skills found!")
+      }
+    )
   }
 
   findSkillByID(id: number){
