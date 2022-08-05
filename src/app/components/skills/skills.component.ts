@@ -54,6 +54,23 @@ export class SkillsComponent implements OnInit {
       }
     )
   }
+  // ### CREATE
+
+  submitNewSkillForm(){
+    console.log(`create-skill: submit form: ${this.skill}`);
+    this.commitSkill();
+  }
+
+  commitSkill(){
+    this.skServ.createSkill(this.skill).subscribe(
+      {
+        next: skillData => {
+          console.log(`create-skill L27: ${skillData}`);
+          this.redirectSkill();},
+        error: error => console.error(error),
+        complete: () => console.info("New skill created")
+      });
+  }
 
   // ### DELETE : FindByID & Delete
 
