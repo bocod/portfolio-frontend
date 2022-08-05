@@ -16,7 +16,20 @@ export class SkillsService {
     return this.http.get<Skill[]>(`${this.url}/view`)
   }
 
+  findSkill(id: number):Observable<Object>{
+    return this.http.get(`${this.url}/find/${id}`)
+  }
+
   createSkill(newSkill: Skill): Observable<Object>{
     return this.http.post(`${this.url}/new`, newSkill)
   }
+
+  putSkill(skill: Skill): Observable<Object>{
+    return this.http.put(`${this.url}/put`, skill)
+  }
+
+  deleteSkill(id: number): Observable<Object>{
+    return this.http.delete(`${this.url}/delete/${id}`)
+  }
+
 }

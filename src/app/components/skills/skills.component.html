@@ -1,7 +1,7 @@
 <section class="container border rounded pt-3 pb-1 mb-3" id="skills">
     <div class="d-flex justify-content-between align-items-center">
         <h2>Skills</h2>
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#skillModal">
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#skillCreateModal">
             <i class="bi bi-plus-circle fs-5"></i>
         </button>
     </div>
@@ -10,14 +10,23 @@
             <div class="d-flex justify-content-between mb-0">
                 <h4 class="text-black-50">{{skill.skill}}</h4>
                 <!-- <div *ngIf="userLogged"> -->
-                <div>
-                <i class="bi bi-pencil-square ms-3"></i>
-                    <i class="bi bi-trash3 ms-3"></i>
+                <div class="d-flex">
+                    <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#skillPutModal" (click)="putSkillID(skill.id!)">
+                        <i class="bi bi-pen"></i>
+                    </button>
+                    <button type="button" class="btn text-danger" data-bs-toggle="modal" data-bs-target="#skillDeleteModal" (click)="delSkillID(skill.id!)">
+                        <i class="bi bi-trash3"></i>
+                    </button>
                 </div>
             </div>
             <div class="text-black-50 text-center">
-                <label for="customRange" class="form-label">
-                    {{skill.levelName}} Level
+                <label for="customRange" class="form-label" [ngSwitch]="skill.level">
+                    <span *ngSwitchCase="0">Rookie</span>
+                    <span *ngSwitchCase="25">Advanced Begginer</span>
+                    <span *ngSwitchCase="50">Intermediate</span>
+                    <span *ngSwitchCase="75">Advanced</span>
+                    <span *ngSwitchCase="100">Expert</span>
+                     Level
                 </label>
             </div>
             <div class="progress ms-3 me-3">
@@ -26,4 +35,57 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="skillDeleteModal" tabindex="-1" aria-labelledby="skillDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger" id="skillDeleteModalLabel">Are you sure?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitDeleteSkill()">
+                <div class="modal-body">
+                    <p *ngIf="skillFound">Your skill <span class="fw-bold">{{skillFound.skill}}</span> is going to be deleted...</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="skillPutModal" tabindex="-1" aria-labelledby="skillPutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="skillFound">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary" id="skillPutModalLabel">Edit</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitPutSkill()">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between m-3">
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g. English" [(ngModel)]="skillFound.skill" name="skill" [value]="skillFound.skill">
+                    </div>
+                    <div class="ms-3 me-3 mb-3">
+                        <select class="form-select" aria-label="Skill level selector" [(ngModel)]="skillFound.level" name="level">
+                            <option selected>Open this select menu</option>
+                            <option value="0">Rookie</option>
+                            <option value="25">Advanced Begginer</option>
+                            <option value="50">Intermediate</option>
+                            <option value="75">Advanced</option>
+                            <option value="100">Expert</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <app-create-skill></app-create-skill>

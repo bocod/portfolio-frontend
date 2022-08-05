@@ -11,7 +11,6 @@ import { SkillsService } from 'src/app/services/skills/skills.service';
 export class CreateSkillComponent implements OnInit {
 
   skill: Skill = new Skill();
-  skillLevel: any;
 
   constructor(private skServ : SkillsService, private router: Router) { }
 
@@ -33,8 +32,12 @@ export class CreateSkillComponent implements OnInit {
         complete: () => console.info("New skill created")
       });
   }
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
   redirectSkill(){
-    this.router.navigate(["/profile#skills"])
+    this.redirectTo("/profile");
   };
 
 }
