@@ -22,34 +22,35 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="projectsModalLabel">Add project</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="projectsModalLabel">Add project</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             
-          <form class="d-flex flex-column" method="XXX" action="/education/XXXX" enctype="multipart/form-data">
-            
-            <div class="input-group input-group-default mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">Project name</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Banana web app" name="name" required>
-            </div>
+            <form class="d-flex flex-column" (ngSubmit)="submitNewProjectForm()">
+              
+                <div class="input-group input-group-default mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Project name</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Banana web app" [(ngModel)]="project.name" name="name" required>
+                </div>
 
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm">Project URL</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: URL to deployed site or repo" name="projectURL">
-            </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Project URL</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: URL to deployed site or repo" [(ngModel)]="project.projectURL" name="projectURL">
+                </div>
 
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
-                <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Stack used or learned, guided or self-guided, team-work or individual, methodologies, achievements" name="description"></textarea>
-            </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+                    <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Stack used or learned, guided or self-guided, team-work or individual, methodologies, achievements" [(ngModel)]="project.description" name="description"></textarea>
+                </div>
 
-        </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
+            </form>
+
         </div>
       </div>
     </div>
