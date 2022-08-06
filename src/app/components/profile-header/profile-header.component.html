@@ -1,33 +1,40 @@
 <div class="container border rounded ps-0 pe-0 pb-3 mb-3">
     <!-- bg img -->
     <div class="overflow-hidden" id="profile-header-bg">
-        <img src="https://picsum.photos/1500/800" class="img-fluid rounded-top" alt="presentation background">
+        <img src="../../../assets/img/userImages/banner_1500x800.jpeg" class="img-fluid rounded-top" alt="presentation background">
     </div>
     <div class="ps-3 d-flex justify-content-between flex-column flex-md-row">
-        <div *ngIf="myProfile">
+        <div *ngFor="let profile of myProfile | slice:0:1">
             <div class="d-flex flex-row align-items-end">
                 <!-- avatar -->
                 <div class="position-relative" id="avatar-container">
                     <img
-                    [src]="myProfile.avatar"
+                    [src]="profile.avatar"
                     class="img-fluid rounded-circle position-absolute top-0 start-0 translate-middle-y"
                     alt="avatar"
                     />
                 </div>
                 <!-- edit avatar -->
-                <a role="button" [routerLink]="['/edit']"><i class="bi bi-pencil-square"></i></a>
+                <div class="d-flex align-items-start">
+                    <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#profilePutModal" (click)="putProfileID(profile.id!)">
+                        <i class="bi bi-pen"></i>
+                    </button>
+                    <button type="button" class="btn text-danger" data-bs-toggle="modal" data-bs-target="#profileDeleteModal" (click)="delProfileID(profile.id!)">
+                        <i class="bi bi-trash3"></i>
+                    </button>
+                </div>
             </div>
             <!-- presentation -->
             <div class="mb-2">
-                <!-- fullname -->
-                <h2 class="mb-1">{{myProfile.firstname}} {{myProfile.surname}}</h2>
-                <!-- subtitle -->
-                <p class="mb-0">{{myProfile.subtitle}}</p>
-                <!-- location & contact -->
-                <p class="mb-0">{{myProfile.location}}</p>
-                <p class="mb-0"><a href="">{{myProfile.contact}}</a></p>
+
+                <h2 class="mb-1">{{profile.firstname}} {{profile.surname}}</h2>
+
+                <p class="mb-0">{{profile.subtitle}}</p>
+
+                <p class="mb-0">{{profile.location}}</p>
+                <p class="mb-0"><a href="">{{profile.contact}}</a></p>
             </div>
-            <!-- buttons * 3 -->
+
             <button type="button" class="btn btn-primary me-2">Interests</button>
             <button type="button" class="btn btn-outline-secondary me-2">
                 Add Section
@@ -36,14 +43,129 @@
         </div>
         <!-- alma mater info -->
         <div class="d-flex flex-column justify-content-center pe-3 mt-2 mt-md-0">
-            <div class="d-flex align-items-center mb-1">
-                <img src="https://picsum.photos/50/50" alt="study center logo" />
-                <p class="mb-0 ps-1">Jerberd</p>
+            <div class="d-flex align-items-center mb-1" *ngFor="let education of myEducation | slice:0:2">
+                <div style="width: 50px;">
+                    <img class="img-fluid" [src]="education.logoURL" alt="study center logo" />
+                </div>
+                <p class="mb-0 ps-1">{{education.institute}}</p>
             </div>
-            <div class="d-flex align-items-center mb-1">
-                <img src="https://picsum.photos/50/50" alt="study center logo" />
-                <p class="mb-0 ps-1">Universidad de Cronopios y de Famas</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="profileCreateModal" tabindex="-1" aria-labelledby="profileCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="profileModalLabel">Add profile</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+            <form class="d-flex flex-column" (ngSubmit)="submitNewProfileForm()">
+                <div class="modal-body">
+                    
+                    <!-- avatar upload -->
+                    <!-- <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupFile01">Avatar</label>
+                        <input type="file" class="form-control" id="inputGroupFile01" [(ngModel)]="profile.avatar">
+                    </div> -->
+                    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profile.firstname" name="firstname" required>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Surname</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profile.surname" name="surname" required>
+                    </div>
+                    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Subtitle</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profile.subtitle" name="subtitle" required>
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profile.location" name="location" required>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Contact</span>
+                        <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profile.contact" name="contact" required>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+
+            </form>
+
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="profileDeleteModal" tabindex="-1" aria-labelledby="profileDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger" id="profileDeleteModalLabel">Are you sure?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form (ngSubmit)="submitDeleteProfile()">
+                <div class="modal-body">
+                    <p *ngIf="profFound">Your profile <span class="fw-bold">{{profFound.firstname}} {{profFound.surname}}</span> with id <span class="fw-bold">{{profFound.id}}</span> is going to be deleted...</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="profilePutModal" tabindex="-1" aria-labelledby="profilePutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="profFound">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary" id="profilePutModalLabel">Edit</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitPutProfile()">
+
+                <div class="modal-body">
+
+                    <!-- avatar upload -->
+                    <!-- <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupFile01">Avatar</label>
+                        <input type="file" class="form-control" id="inputGroupFile01" [(ngModel)]="profFound.avatar">
+                    </div> -->
+                    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profFound.firstname" name="firstname" required>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Surname</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profFound.surname" name="surname" required>
+                    </div>
+                    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Subtitle</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profFound.subtitle" name="subtitle" required>
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profFound.location" name="location" required>
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Contact</span>
+                        <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="profFound.contact" name="contact" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>

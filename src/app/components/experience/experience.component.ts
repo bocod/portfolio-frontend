@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Experience } from 'src/app/classes/experience';
 import { ExperienceService } from 'src/app/services/experience/experience.service';
 
 @Component({
@@ -8,9 +10,11 @@ import { ExperienceService } from 'src/app/services/experience/experience.servic
 })
 export class ExperienceComponent implements OnInit {
 
-  myExperience: any;
+  myExperience: Experience[] | undefined;
   parseDate = Date.parse;
 
+  expFound: any;
+  experience: Experience = new Experience;
 
   calcElapsed = (end:any, start:any) => {
     if (end != null) {
@@ -30,12 +34,95 @@ export class ExperienceComponent implements OnInit {
     }
   };
 
-  constructor(private experienceData: ExperienceService) { }
+  constructor(private expServ: ExperienceService, private router: Router) { }
 
   ngOnInit(): void {
-    this.experienceData.getData().subscribe( data => {
-      this.myExperience = data;
+    this.expServ.getData().subscribe( 
+      {
+        next: expData => {
+          console.log(`Experience found: ${expData}:  ${JSON.stringify(expData)}`);
+          this.myExperience = expData},
+        error: error => console.error(error),
+        complete: () => console.info("Experience found!")
+      }
+    )
+  }
+
+
+  findExperienceByID(id: number){
+    this.expServ.findExperience(id).subscribe(
+      {
+        next: expData => {
+          console.log(`Experience found: ${expData}:  ${JSON.stringify(expData)}`);
+          this.expFound = expData},
+        error: error => console.error(error),
+        complete: () => console.info("Experience found!")
+      }
+    )
+  }
+
+  // ### CREATE
+
+  submitNewExperienceForm(){
+    console.log(this.experience);
+    this.commitExperience();
+  };
+
+  commitExperience(){
+    this.expServ.createExperience(this.experience).subscribe(
+      {
+        next: expData => {
+          console.log(`create-experience: ${expData}`);
+          this.redirectExperience();},
+        error: error => console.error(error),
+        complete: () => console.info("New experience created")
+      }
+    )
+  }
+
+  // ### PUT : 
+
+  putExperienceID(id: number){
+    console.log(id);
+    this.findExperienceByID(id);
+  }
+
+  submitPutExperience(){
+    this.expServ.putExperience(this.expFound).subscribe(
+      {
+        next: expData => {
+          console.log(`Experience to put: ${expData}`);
+          this.redirectExperience();},
+        error: error => console.error(error),
+        complete: () => console.info("Experience patched!")
+      }
+    )
+  }
+
+  // ### DELETE : 
+
+  delExperienceID(id: number){
+    console.log(id);
+    this.findExperienceByID(id);
+  }
+
+  submitDeleteExperience(){
+    this.expServ.deleteExperience(this.expFound.id!).subscribe(
+      {
+      next: expData => {
+        console.log(`Experience to delete: ${expData}`);
+        this.redirectExperience();},
+      error: error => console.error(error),
+      complete: () => console.info("Experience deleted!")
     })
+  }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+  redirectExperience(){
+    this.redirectTo("/profile");
   }
 
 }
