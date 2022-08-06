@@ -1,7 +1,7 @@
 <section>
     <div class="d-flex justify-content-between align-items-center">
         <h2>Education</h2>
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#eduModal">
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#educationCreateModal">
             <i class="bi bi-plus-circle fs-5"></i>
         </button>
     </div>
@@ -10,12 +10,12 @@
             <div id="logo">
                 <img class="img-fluid" [src]="education.logoURL" alt="Institute logo">
             </div>
-            <div class="ms-3">
+            <div class="ms-3" id="eduDetail">
                 <h4 class="mb-0">{{education.degree}}</h4>
                 <p class="mb-0">{{education.institute}}</p>
                 <p class="mb-1 text-secondary">
                     {{education.end != null ? education.end : (education.studying ? "Studying" : "Abandoned")}} 
-                    ·
+                    · 
                     <span *ngIf="education.certificateURL == null">Certificate Pending</span>
                     <span *ngIf="education.certificateURL">
                         <a [href]="education.certificateURL" target="_blank" rel="noopener">Certificate - Diploma</a>
@@ -24,59 +24,149 @@
                 <p class="mb-1">{{education.description}}</p>
             </div>
         </div>
-        <div>
-            <i class="bi bi-pencil-square ms-3"></i>
-            <i class="bi bi-trash3 ms-3"></i>
+        <div class="d-flex align-items-start">
+            <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#educationPutModal" (click)="putEducationID(education.id!)">
+                <i class="bi bi-pen"></i>
+            </button>
+            <button type="button" class="btn text-danger" data-bs-toggle="modal" data-bs-target="#educationDeleteModal" (click)="delEducationID(education.id!)">
+                <i class="bi bi-trash3"></i>
+            </button>
         </div>
     </article>
 </section>
-<div class="modal fade" id="eduModal" tabindex="-1" aria-labelledby="eduModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="educationCreateModal" tabindex="-1" aria-labelledby="educationCreateModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="eduModalLabel">Add education</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="educationModalLabel">Add education</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form class="d-flex flex-column" method="XXX" action="/education/XXXX" enctype="multipart/form-data">
+            
+            <form class="d-flex flex-column" (ngSubmit)="submitNewEducationForm()">
+
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="instituteLogo">Logo</label>
-                    <input type="file" class="form-control" id="instituteLogo" name="logoURL">
+                    <input type="file" class="form-control" id="instituteLogo" [(ngModel)]="education.logoURL" name="logoURL">
                 </div>
 
                 <div class="input-group input-group-default mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">Degree</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Master in Software Development" name="degree" required>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Master in Software Development" [(ngModel)]="education.degree" name="degree" required>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Institute</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: FreeCodeCamp" name="institute" required>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: FreeCodeCamp" [(ngModel)]="education.institute" name="institute" required>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Ending date or expected</span>
-                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="end" required>
+                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="education.end" name="end" required>
+                </div>
+
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="education.studying" name="studying">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Currently studying</label>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Certificate or Diploma</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: URL to Diploma" name="certificateURL">
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: URL to Diploma" [(ngModel)]="education.certificateURL" name="certificateURL">
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
-                    <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Stack used or learned, guided or self-guided, team-work or individual, methodologies, achievements" name="description"></textarea>
+                    <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Stack used or learned, guided or self-guided, team-work or individual, methodologies, achievements" [(ngModel)]="education.description" name="description"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
                 </div>
 
             </form>
 
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
         </div>
       </div>
+    </div>
+</div>
+
+<div class="modal fade" id="educationDeleteModal" tabindex="-1" aria-labelledby="educationDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger" id="educationDeleteModalLabel">Are you sure?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitDeleteEducation()">
+                <div class="modal-body">
+                    <p *ngIf="eduFound">Your project <span class="fw-bold">{{eduFound.degree}}</span> is going to be deleted...</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="educationPutModal" tabindex="-1" aria-labelledby="educationPutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="eduFound">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary" id="educationPutModalLabel">Edit</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitPutEducation()">
+
+                <div class="modal-body">
+                    <!-- <div class="input-group mb-3">
+                        <label class="input-group-text" for="instituteLogo">
+                            Logo
+                        </label>
+                        <input type="file" class="form-control" id="instituteLogo" [(ngModel)]="education.logoURL" name="logoURL">
+                    </div> -->
+    
+                    <div class="input-group input-group-default mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Degree</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Master in Software Development" [(ngModel)]="education.degree" name="degree"  [value]="eduFound.degree" required>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Institute</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: FreeCodeCamp" [(ngModel)]="education.institute" name="institute"  [value]="eduFound.institute" required>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Ending date or expected</span>
+                        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="education.end" name="end"  [value]="eduFound.end" required>
+                    </div>
+
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="education.studying" name="studying">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Currently studying</label>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Certificate or Diploma</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: URL to Diploma" [(ngModel)]="education.certificateURL" name="certificateURL" [value]="eduFound.certificateURL" >
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+                        <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Stack used or learned, guided or self-guided, team-work or individual, methodologies, achievements" [(ngModel)]="education.description" name="description" [value]="eduFound.description" ></textarea>
+                    </div>
+    
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+
+            </form>
+        </div>
     </div>
 </div>
