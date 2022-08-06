@@ -19,7 +19,7 @@
                     {{experience.end != null ? experience.end : (experience.currentJob  ? "Current Job" : "")}} 
                     · 
                     {{calcElapsed(experience.end, experience.start)}}</p>
-                <p class="mb-1 text-secondary">{{experience.location}}, Country</p>
+                <p class="mb-1 text-secondary">{{experience.location}}</p>
                 <p class="mb-1">{{experience.description}}</p>
             </div>
         </div>
@@ -59,7 +59,7 @@
                         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Blue Shine SRL" [(ngModel)]="experience.company" name="company" required>
                         <!-- Add ngif selected value coming from db -->
                         <select class="form-select" aria-label="Default select example" [(ngModel)]="experience.contract" name="contract">
-                            <option selected>Working hours</option>
+                            <option disabled selected value="undefined">Working hours</option>
                             <option value="1">Freelance</option>
                             <option value="2">Full-Time</option>
                             <option value="3">Part-Time</option>
