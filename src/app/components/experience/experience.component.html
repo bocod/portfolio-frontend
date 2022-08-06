@@ -1,7 +1,7 @@
 <section *ngIf="myExperience">
     <div class="d-flex justify-content-between align-items-center">
         <h2>Experience</h2>
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#expModal">
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#expCreateModal">
             <i class="bi bi-plus-circle fs-5"></i>
         </button>
     </div>
@@ -23,72 +23,162 @@
                 <p class="mb-1">{{experience.description}}</p>
             </div>
         </div>
-        <div>
-            <i class="bi bi-pencil-square ms-3"></i>
-            <i class="bi bi-trash3 ms-3"></i>
+        <div class="d-flex align-items-start">
+            <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#expPutModal" (click)="putExperienceID(experience.id!)">
+                <i class="bi bi-pen"></i>
+            </button>
+            <button type="button" class="btn text-danger" data-bs-toggle="modal" data-bs-target="#expDeleteModal" (click)="delExperienceID(experience.id!)">
+                <i class="bi bi-trash3"></i>
+            </button>
         </div>
     </article>
 </section>
-<div class="modal fade" id="expModal" tabindex="-1" aria-labelledby="expModalLabel" aria-hidden="true">
+<div class="modal fade" id="expCreateModal" tabindex="-1" aria-labelledby="expCreateModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="expModalLabel">Add experience</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="expModalLabel">Add education</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form class="d-flex flex-column" method="XXXX" action="/experience/XXXX" enctype="multipart/form-data">
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="companyLogo">Logo</label>
-                    <input type="file" class="form-control" id="companyLogo" name="logoURL">
-                </div>
-
-                <div class="input-group input-group-default mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Role</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Front End Web Developer" name="role" required>
-                </div>
-
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Blue Shine SRL" name="company" required>
-                    <!-- Add ngif selected value coming from db -->
-                    <select class="form-select" aria-label="Default select example" name="contract">
-                        <option selected>Working hours</option>
-                        <option value="1">Freelance</option>
-                        <option value="2">Full-Time</option>
-                        <option value="3">Part-Time</option>
-                    </select>
-                </div>
-
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Starting date</span>
-                    <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="start" required>
-                    <ng-container *ngIf="!currentJob">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Ending date</span>
-                        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="end" required>
-                    </ng-container>
+            
+            <form class="d-flex flex-column" (ngSubmit)="submitNewExperienceForm()">
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="companyLogo">Logo</label>
+                        <input type="file" class="form-control" id="companyLogo" [(ngModel)]="experience.logoURL" name="logoURL">
+                    </div>
+    
+                    <div class="input-group input-group-default mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Role</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="e.g.: Front End Web Developer" [(ngModel)]="experience.role" name="role" required>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Blue Shine SRL" [(ngModel)]="experience.company" name="company" required>
+                        <!-- Add ngif selected value coming from db -->
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="experience.contract" name="contract">
+                            <option selected>Working hours</option>
+                            <option value="1">Freelance</option>
+                            <option value="2">Full-Time</option>
+                            <option value="3">Part-Time</option>
+                        </select>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Starting date</span>
+                        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="experience.start" name="start" required>
+                        <ng-container *ngIf="!experience.currentJob">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Ending date</span>
+                            <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="experience.end" name="end" required>
+                        </ng-container>
+                    </div>
+                    
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="experience.currentJob" name="currentJob">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Current job</label>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Argentina" [(ngModel)]="experience.location" name="location" required>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+                        <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Responsibilities, stack used or learned, team-work or individual, methodologies, achievements" [(ngModel)]="experience.description" name="description"></textarea>
+                    </div>
                 </div>
                 
-                <div class="form-check form-switch mb-3">
-                    <input [(ngModel)]="currentJob" (change)="currentJobChange($event)" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Current job</label>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
                 </div>
 
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Argentina" name="location" required>
-                </div>
-
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
-                    <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="e.g.: Responsibilities, stack used or learned, team-work or individual, methodologies, achievements" name="description"></textarea>
-                </div>
             </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save</button>
+
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+<div class="modal fade" id="expDeleteModal" tabindex="-1" aria-labelledby="expDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger" id="expDeleteModalLabel">Are you sure?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitDeleteExperience()">
+                <div class="modal-body">
+                    <p *ngIf="expFound">Your project <span class="fw-bold">{{expFound.role}}</span> at <span class="fw-bold">{{expFound.company}}</span> is going to be deleted...</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="expPutModal" tabindex="-1" aria-labelledby="expPutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="expFound">
+            <div class="modal-header">
+              <h5 class="modal-title text-primary" id="expPutModalLabel">Edit</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="submitPutExperience()">
+
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="companyLogo">Logo</label>
+                        <input type="file" class="form-control" id="companyLogo" [(ngModel)]="expFound.logo" name="logo">
+                    </div>
+    
+                    <div class="input-group input-group-default mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Role</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" [(ngModel)]="expFound.role" name="role" required>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Company</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="expFound.company" name="company" required>
+                        <!-- Add ngif selected value coming from db -->
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="expFound.contract" name="contract">
+                            <option value="Freelance">Freelance</option>
+                            <option value="Full-Time">Full-Time</option>
+                            <option value="Part-Time">Part-Time</option>
+                            </select>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Starting date</span>
+                        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="expFound.start" name="start" required>
+                        <ng-container *ngIf="!expFound.currentJob">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Ending date</span>
+                            <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="expFound.end" name="end" required>
+                        </ng-container>
+                    </div>
+                    
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="expFound.currentJob" name="currentJob">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Current job</label>
+                    </div>
+    
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="expFound.location" name="location" required>
+                    </div>    
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
