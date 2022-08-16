@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Skill } from 'src/app/classes/skill';
+import { AuthenticatorService } from 'src/app/services/authenticator.service';
 import { SkillsService } from 'src/app/services/skills/skills.service';
 
 @Component({
@@ -15,7 +16,9 @@ export class SkillsComponent implements OnInit {
   skill: Skill = new Skill;
   
 
-  constructor(private skServ: SkillsService, private router:Router) { }
+  constructor(private skServ: SkillsService, private authenticatorService: AuthenticatorService, private router:Router) { }
+
+  userLogged = this.authenticatorService.IsLogged;
 
   ngOnInit(): void {
     this.skServ.getData().subscribe(

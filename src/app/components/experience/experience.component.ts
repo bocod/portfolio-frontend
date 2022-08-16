@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Experience } from 'src/app/classes/experience';
+import { AuthenticatorService } from 'src/app/services/authenticator.service';
 import { ExperienceService } from 'src/app/services/experience/experience.service';
 
 @Component({
@@ -34,7 +35,9 @@ export class ExperienceComponent implements OnInit {
     }
   };
 
-  constructor(private expServ: ExperienceService, private router: Router) { }
+  constructor(private expServ: ExperienceService, private authenticatorService: AuthenticatorService, private router: Router) { }
+
+  userLogged = this.authenticatorService.IsLogged;
 
   ngOnInit(): void {
     this.expServ.getData().subscribe( 

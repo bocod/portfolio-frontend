@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Education } from 'src/app/classes/education';
 import { Profile } from 'src/app/classes/profile';
+import { AuthenticatorService } from 'src/app/services/authenticator.service';
 import { EducationService } from 'src/app/services/education/education.service';
 import { ProfileHeaderService } from 'src/app/services/profile-header/profile-header.service';
 
@@ -18,7 +19,10 @@ export class ProfileHeaderComponent implements OnInit {
   profFound: any;
   profile: Profile = new Profile;
 
-  constructor(private profServ: ProfileHeaderService, private eduServ: EducationService, private router: Router) { }
+  
+  constructor(private profServ: ProfileHeaderService, private eduServ: EducationService, private authenticatorService: AuthenticatorService, private router: Router) { }
+  
+  userLogged = this.authenticatorService.IsLogged;
 
   ngOnInit(): void {
     this.profServ.getData().subscribe( 

@@ -15,7 +15,7 @@
                     />
                 </div>
                 <!-- edit avatar -->
-                <div class="d-flex align-items-start">
+                <div *ngIf="userLogged" class="d-flex align-items-start">
                     <button type="button" class="btn text-primary" data-bs-toggle="modal" data-bs-target="#profilePutModal" (click)="putProfileID(profile.id!)">
                         <i class="bi bi-pen"></i>
                     </button>
