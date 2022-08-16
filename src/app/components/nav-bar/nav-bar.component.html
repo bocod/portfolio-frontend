@@ -8,9 +8,9 @@
             <i class="bi bi-linkedin ms-2 text-white-50 fs-2"></i>
             <i class="bi bi-github ms-2 text-white-50 fs-2"></i>
             <!-- <button type="button" [routerLink]="['login']" class="btn btn-outline-success ms-2" *ngIf="!authService.logIn">Login</button> -->
-            <button type="button" [routerLink]="['/login']" class="btn btn-outline-success ms-2">Login</button>
+            <button *ngIf="!userLogged" type="button" [routerLink]="['/login']" class="btn btn-outline-success ms-2">Login</button>
             <!-- <button type="button" [routerLink]="['']" class="btn btn-outline-danger ms-2" (click)="logout()" *ngIf="authService.logIn">Logout</button> -->
-            <!-- <button type="button" [routerLink]="['']" class="btn btn-outline-danger ms-2">Logout</button> -->
+            <button *ngIf="userLogged" type="submit" class="btn btn-outline-danger ms-2" (click)="logout($event)">Logout</button>
         </div>
     </nav>
 </div>

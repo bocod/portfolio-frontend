@@ -2,22 +2,22 @@
 <form [formGroup]="loginForm" class="container col-lg-4" (ngSubmit)="onSubmit($event)">
 
     <div class="form-floating mb-3">
-        <input type="email" formControlName="email" 
-        [ngClass]="{'is-invalid': Email?.errors && Email?.touched, 'is-valid': !Email?.errors && !Email?.touched}"
+        <input type="username" formControlName="username" 
+        [ngClass]="{'is-invalid': Username?.errors && Username?.touched, 'is-valid': !Username?.errors && Username?.touched}"
         class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address <sup>*</sup></label>
+        <label for="floatingInput">Username <sup>*</sup></label>
     </div>
 
-    <div *ngIf="Email?.errors && Email?.touched">
-        <p *ngIf="Email?.hasError('required')" class="text-danger"><sup>*</sup> Email required</p>
+    <div *ngIf="Username?.errors && Username?.touched">
+        <p *ngIf="Username?.hasError('required')" class="text-danger"><sup>*</sup> Username required</p>
     </div>
-    <div *ngIf="Email?.errors && Email?.touched">
-        <p *ngIf="Email?.hasError('email')" class="text-danger">Email must be a valid email address</p>
+    <div *ngIf="Username?.errors && Username?.touched">
+        <p *ngIf="Username?.hasError('pattern') || Username?.hasError('minlength')" class="text-danger">Username must be a valid username</p>
     </div>
     
     <div class="form-floating mb-3">
         <input type="password" formControlName="password" class="form-control" 
-        [ngClass]="{'is-invalid': Password?.errors && Password?.touched, 'is-valid': !Password?.errors && !Password?.touched}"
+        [ngClass]="{'is-invalid': Password?.errors && Password?.touched, 'is-valid': !Password?.errors && Password?.touched}"
         id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password <sup>*</sup></label>
     </div>

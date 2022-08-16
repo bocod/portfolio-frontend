@@ -7,13 +7,12 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GuardGuard } from './services/guard.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo:'home', pathMatch:'full'},
   {path: 'home', component:HomeComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'profile', component:ProfileComponent, 
-  // canActivate:[GuardGuard]
-  },
-  {path: '**', redirectTo: ''}
+  {path: 'profile', component:ProfileComponent},
+  {path: 'admin', component:ProfileComponent, canActivate:[GuardGuard]},
+  {path: '', redirectTo:'home', pathMatch:'full'},
+  {path: '**', redirectTo: 'home'}
   // {path: '**', component: Pagina404Component}
 ];
 

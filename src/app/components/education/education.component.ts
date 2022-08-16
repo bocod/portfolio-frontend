@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Education } from 'src/app/classes/education';
+import { AuthenticatorService } from 'src/app/services/authenticator.service';
 import { EducationService } from 'src/app/services/education/education.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class EducationComponent implements OnInit {
   eduFound: any;
   education: Education = new Education;
 
-  constructor(private eduServ: EducationService, private router: Router) { }
+  constructor(private eduServ: EducationService, private authenticatorService: AuthenticatorService, private router: Router) { }
+
+  userLogged = this.authenticatorService.IsLogged;
 
   ngOnInit(): void {
     this.eduServ.getData().subscribe( 

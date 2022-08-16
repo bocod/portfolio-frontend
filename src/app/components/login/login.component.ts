@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder:FormBuilder, private authenticatorService: AuthenticatorService, private route:Router) { 
     this.loginForm = this.formBuilder.group(
       {
-        email:['', [Validators.required, Validators.email]],
+        username:['', [Validators.required, Validators.pattern("^[a-zA-Z0-9\-\.]*$"), Validators.minLength(5)]],
         password:['', [Validators.required, Validators.minLength(8)]]
       }
     )
@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get Email()
+  get Username()
   {
-    return this.loginForm.get('email');
+    return this.loginForm.get('username');
   }
 
   get Password()

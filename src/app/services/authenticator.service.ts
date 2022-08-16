@@ -28,4 +28,8 @@ export class AuthenticatorService {
   {
     return this.currentUserSubject.value;
   }
+
+  get IsLogged() {
+    return Object.keys(this.currentUserSubject.value).length === 0 ? false : true;
+  }
 }

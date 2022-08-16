@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/classes/project';
+import { AuthenticatorService } from 'src/app/services/authenticator.service';
 import { ProjectsService } from 'src/app/services/projects/projects.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class ProjectsComponent implements OnInit {
   projectFound: any;
   project: Project = new Project;
 
-  constructor(private proServ: ProjectsService, private router: Router) { }
+  constructor(private proServ: ProjectsService, private authenticatorService: AuthenticatorService, private router: Router) { }
+
+  userLogged = this.authenticatorService.IsLogged;
 
   ngOnInit(): void {
     this.proServ.getData().subscribe( 

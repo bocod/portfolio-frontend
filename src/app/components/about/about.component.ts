@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { About } from 'src/app/classes/about';
 import { AboutService } from 'src/app/services/about/about.service';
+import { AuthenticatorService } from 'src/app/services/authenticator.service';
 
 @Component({
   selector: 'app-about',
@@ -14,7 +15,9 @@ export class AboutComponent implements OnInit {
   aboutFound: any;
   about: About = new About;
 
-  constructor(private aboutServ: AboutService, private router: Router) { }
+  constructor(private aboutServ: AboutService, private authenticatorService: AuthenticatorService, private router: Router) { }
+
+  userLogged = this.authenticatorService.IsLogged;
 
   ngOnInit(): void {
     this.aboutServ.getData().subscribe( 
