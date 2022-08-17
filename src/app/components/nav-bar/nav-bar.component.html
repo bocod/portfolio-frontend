@@ -14,3 +14,19 @@
         </div>
     </nav>
 </div>
+<div *ngIf="isUser" class="container">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <strong>Welcome!</strong> 
+        You are logged as user so you can edit content. But you cannot access <a href="/admin" class="alert-link">this view</a>.
+        Feel free of closing this alert...
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+</div>
+<div *ngIf="isAdmin" class="container">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Welcome!</strong> 
+        You are logged as admin so you can edit content and access <a href="/admin" class="alert-link">this view</a>.
+        Feel free of closing this alert...
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+</div>

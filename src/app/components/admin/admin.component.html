@@ -1,0 +1,47 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <div *ngIf="userLogged && !isAdmin" class="alert alert-danger d-flex align-items-center" role="alert">
+        <div>
+        <strong>Access denied!</strong> You need permission to access this info.
+        </div>
+    </div>
+
+    <div *ngIf="userLogged && isAdmin">
+        <h2>Admin dashboard</h2>
+        <p>Only accessible for users with Role: Admin</p>
+        <button type="button" [routerLink]="['/profile']" class="btn btn-primary">Profile</button>
+
+        <div class="d-flex flex-wrap mt-3">
+            <div class="card me-3" style="min-width: 10em;">
+                <h5 class="card-header">About</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Length {{myAbout}} characters</h5>
+                </div>
+            </div>
+            <div class="card me-3" style="min-width: 10em;">
+                <h5 class="card-header">Experience</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Total {{myExperience}}</h5>
+                </div>
+            </div>
+            <div class="card me-3" style="min-width: 10em;">
+                <h5 class="card-header">Education</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Total {{myEducation}}</h5>
+                </div>
+            </div>
+            <div class="card me-3" style="min-width: 10em;">
+                <h5 class="card-header">Skills</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Total {{mySkills}}</h5>
+                </div>
+            </div>
+            <div class="card me-3" style="min-width: 10em;">
+                <h5 class="card-header">Projects</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Total {{myProjects}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
