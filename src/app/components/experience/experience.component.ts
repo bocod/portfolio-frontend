@@ -43,7 +43,6 @@ export class ExperienceComponent implements OnInit {
     this.expServ.getData().subscribe( 
       {
         next: expData => {
-          console.log(`Experience found: ${expData}:  ${JSON.stringify(expData)}`);
           this.myExperience = expData},
         error: error => console.error(error),
         complete: () => console.info("Experience found!")
@@ -56,7 +55,6 @@ export class ExperienceComponent implements OnInit {
     this.expServ.findExperience(id).subscribe(
       {
         next: expData => {
-          console.log(`Experience found: ${expData}:  ${JSON.stringify(expData)}`);
           this.expFound = expData},
         error: error => console.error(error),
         complete: () => console.info("Experience found!")
@@ -67,7 +65,6 @@ export class ExperienceComponent implements OnInit {
   // ### CREATE
 
   submitNewExperienceForm(){
-    console.log(this.experience);
     this.commitExperience();
   };
 
@@ -75,7 +72,6 @@ export class ExperienceComponent implements OnInit {
     this.expServ.createExperience(this.experience).subscribe(
       {
         next: expData => {
-          console.log(`create-experience: ${expData}`);
           this.redirectExperience();},
         error: error => console.error(error),
         complete: () => console.info("New experience created")
@@ -86,7 +82,6 @@ export class ExperienceComponent implements OnInit {
   // ### PUT : 
 
   putExperienceID(id: number){
-    console.log(id);
     this.findExperienceByID(id);
   }
 
@@ -94,7 +89,6 @@ export class ExperienceComponent implements OnInit {
     this.expServ.putExperience(this.expFound).subscribe(
       {
         next: expData => {
-          console.log(`Experience to put: ${expData}`);
           this.redirectExperience();},
         error: error => console.error(error),
         complete: () => console.info("Experience patched!")
@@ -105,7 +99,6 @@ export class ExperienceComponent implements OnInit {
   // ### DELETE : 
 
   delExperienceID(id: number){
-    console.log(id);
     this.findExperienceByID(id);
   }
 
@@ -113,7 +106,6 @@ export class ExperienceComponent implements OnInit {
     this.expServ.deleteExperience(this.expFound.id!).subscribe(
       {
       next: expData => {
-        console.log(`Experience to delete: ${expData}`);
         this.redirectExperience();},
       error: error => console.error(error),
       complete: () => console.info("Experience deleted!")

@@ -21,12 +21,9 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.aboutServ.getData().subscribe( 
-      // data => {
-      
-      // this.myAbout = data[0];}
+ 
       {
         next: aboutData => {
-          console.log(`About found: ${aboutData}:  ${JSON.stringify(aboutData)}`);
           this.myAbout = aboutData[0]},
         error: error => console.error(error),
         complete: () => console.info("About found!")
@@ -38,7 +35,6 @@ export class AboutComponent implements OnInit {
     this.aboutServ.findAbout(id).subscribe(
       {
         next: aboutData => {
-          console.log(`About found: ${aboutData}:  ${JSON.stringify(aboutData)}`);
           this.aboutFound = aboutData},
         error: error => console.error(error),
         complete: () => console.info("About found!")
@@ -49,7 +45,6 @@ export class AboutComponent implements OnInit {
   // ### CREATE
 
   submitNewAboutForm(){
-    console.log(this.about);
     this.commitAbout();
   };
 
@@ -57,7 +52,6 @@ export class AboutComponent implements OnInit {
     this.aboutServ.createAbout(this.about).subscribe(
       {
         next: aboutData => {
-          console.log(`create-about L27: ${aboutData}`);
           this.redirectAbout();},
         error: error => console.error(error),
         complete: () => console.info("New about created")
@@ -68,7 +62,6 @@ export class AboutComponent implements OnInit {
   // ### PUT : FindByID & Put
     // Find the about by id and save the value
   putAboutID(id: number){
-    console.log(id);
     this.findAboutByID(id);
   }
 
@@ -76,7 +69,6 @@ export class AboutComponent implements OnInit {
     this.aboutServ.putAbout(this.aboutFound).subscribe(
       {
         next: aboutData => {
-          console.log(`about to put: ${aboutData}`);
           this.redirectAbout();},
         error: error => console.error(error),
         complete: () => console.info("About patched!")
@@ -89,7 +81,6 @@ export class AboutComponent implements OnInit {
   // Get the id of the about to be deleted
     // Find the about by id and save the value
   delAboutID(id: number){
-    console.log(id);
     this.findAboutByID(id);
   }
 
@@ -98,7 +89,6 @@ export class AboutComponent implements OnInit {
     this.aboutServ.deleteAbout(this.aboutFound.id!).subscribe(
       {
       next: aboutData => {
-        console.log(`about to delete: ${aboutData}`);
         this.redirectAbout();},
       error: error => console.error(error),
       complete: () => console.info("About deleted!")

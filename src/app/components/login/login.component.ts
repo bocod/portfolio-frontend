@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
     this.authenticatorService.Login(this.loginForm.value).subscribe(
       {
         next: data => {
-          console.log(`Profile found: ${data}:  ${JSON.stringify(data)}`);
           this.route.navigate(['/profile'])},
         error: error => {
           console.error(error)

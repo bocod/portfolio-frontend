@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
     this.profServ.getData().subscribe( 
       {
         next: profileData => {
-          console.log(`Profile found: ${profileData}:  ${JSON.stringify(profileData)}`);
           this.myProfile = profileData[0].contact},
         error: error => console.error(error),
         complete: () => console.info("Profile found!")

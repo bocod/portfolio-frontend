@@ -22,13 +22,7 @@ export class NavBarComponent implements OnInit {
   userLogged = this.authenticatorService.IsLogged;
   
   
-  ngOnInit(): void {
-
-    console.log(this.userLogged);
-    
-    console.log("soy el navbar!!!");
-    
-  }
+  ngOnInit(): void { }
 
   logout(event: Event){
     event.preventDefault();

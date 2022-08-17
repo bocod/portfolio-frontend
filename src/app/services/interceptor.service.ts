@@ -21,8 +21,6 @@ export class InterceptorService implements HttpInterceptor {
         }
       })
     }
-
-    console.log(`Interceptor running: ${JSON.stringify(currentUser)}`);
     
     return next.handle(req);
   }
