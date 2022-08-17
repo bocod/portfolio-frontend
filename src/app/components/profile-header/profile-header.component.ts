@@ -33,7 +33,6 @@ export class ProfileHeaderComponent implements OnInit {
     this.profServ.getData().subscribe( 
       {
         next: profileData => {
-          console.log(`Profile found: ${profileData}:  ${JSON.stringify(profileData)}`);
           this.myProfile = profileData},
         error: error => console.error(error),
         complete: () => console.info("Profile found!")
@@ -43,7 +42,6 @@ export class ProfileHeaderComponent implements OnInit {
     this.eduServ.getData().subscribe( 
       {
         next: eduData => {
-          console.log(`Education found: ${eduData}:  ${JSON.stringify(eduData)}`);
           this.myEducation = eduData},
         error: error => console.error(error),
         complete: () => console.info("Education found!")
@@ -56,7 +54,6 @@ export class ProfileHeaderComponent implements OnInit {
     this.profServ.findProfile(id).subscribe(
       {
         next: profileData => {
-          console.log(`Profile found: ${profileData}:  ${JSON.stringify(profileData)}`);
           this.profFound = profileData},
         error: error => console.error(error),
         complete: () => console.info("Profile found!")
@@ -67,7 +64,6 @@ export class ProfileHeaderComponent implements OnInit {
   // ### CREATE
 
   submitNewProfileForm(){
-    console.log(this.profile);
     this.commitProfile();
   };
 
@@ -75,7 +71,6 @@ export class ProfileHeaderComponent implements OnInit {
     this.profServ.createProfile(this.profile).subscribe(
       {
         next: profData => {
-          console.log(`create-profile: ${profData}`);
           this.redirectProfile();},
         error: error => console.error(error),
         complete: () => console.info("New profile created")
@@ -86,7 +81,6 @@ export class ProfileHeaderComponent implements OnInit {
   // ### PUT : 
 
   putProfileID(id: number){
-    console.log(id);
     this.findProfileByID(id);
   }
 
@@ -94,7 +88,6 @@ export class ProfileHeaderComponent implements OnInit {
     this.profServ.putProfile(this.profFound).subscribe(
       {
         next: profData => {
-          console.log(`Profile to put: ${profData}`);
           this.redirectProfile();},
         error: error => console.error(error),
         complete: () => console.info("Profile patched!")
@@ -105,7 +98,6 @@ export class ProfileHeaderComponent implements OnInit {
   // ### DELETE : 
 
   delProfileID(id: number){
-    console.log(id);
     this.findProfileByID(id);
   }
 
@@ -113,7 +105,6 @@ export class ProfileHeaderComponent implements OnInit {
     this.profServ.deleteProfile(this.profFound.id!).subscribe(
       {
       next: profData => {
-        console.log(`Profile to delete: ${profData}`);
         this.redirectProfile();},
       error: error => console.error(error),
       complete: () => console.info("Profile deleted!")

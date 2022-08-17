@@ -23,7 +23,6 @@ export class EducationComponent implements OnInit {
     this.eduServ.getData().subscribe( 
       {
         next: eduData => {
-          console.log(`Education found: ${eduData}:  ${JSON.stringify(eduData)}`);
           this.myEducation = eduData},
         error: error => console.error(error),
         complete: () => console.info("Education found!")
@@ -36,7 +35,6 @@ export class EducationComponent implements OnInit {
     this.eduServ.findEducation(id).subscribe(
       {
         next: eduData => {
-          console.log(`Education found: ${eduData}:  ${JSON.stringify(eduData)}`);
           this.eduFound = eduData},
         error: error => console.error(error),
         complete: () => console.info("Education found!")
@@ -47,7 +45,6 @@ export class EducationComponent implements OnInit {
   // ### CREATE
 
   submitNewEducationForm(){
-    console.log(this.education);
     this.commitEducation();
   };
 
@@ -55,7 +52,6 @@ export class EducationComponent implements OnInit {
     this.eduServ.createEducation(this.education).subscribe(
       {
         next: eduData => {
-          console.log(`create-education: ${eduData}`);
           this.redirectEducation();},
         error: error => console.error(error),
         complete: () => console.info("New education created")
@@ -66,7 +62,6 @@ export class EducationComponent implements OnInit {
   // ### PUT : 
 
   putEducationID(id: number){
-    console.log(id);
     this.findEducationByID(id);
   }
 
@@ -74,7 +69,6 @@ export class EducationComponent implements OnInit {
     this.eduServ.putEducation(this.eduFound).subscribe(
       {
         next: eduData => {
-          console.log(`Education to put: ${eduData}`);
           this.redirectEducation();},
         error: error => console.error(error),
         complete: () => console.info("Education patched!")
@@ -85,7 +79,6 @@ export class EducationComponent implements OnInit {
   // ### DELETE : 
 
   delEducationID(id: number){
-    console.log(id);
     this.findEducationByID(id);
   }
 
@@ -93,7 +86,6 @@ export class EducationComponent implements OnInit {
     this.eduServ.deleteEducation(this.eduFound.id!).subscribe(
       {
       next: eduData => {
-        console.log(`Education to delete: ${eduData}`);
         this.redirectEducation();},
       error: error => console.error(error),
       complete: () => console.info("Education deleted!")

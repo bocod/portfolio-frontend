@@ -23,7 +23,6 @@ export class ProjectsComponent implements OnInit {
     this.proServ.getData().subscribe( 
       {
         next: proData => {
-          console.log(`Projects found: ${proData}:  ${JSON.stringify(proData)}`);
           this.myProjects = proData},
         error: error => console.error(error),
         complete: () => console.info("Projects found!")
@@ -36,7 +35,6 @@ export class ProjectsComponent implements OnInit {
     this.proServ.findProject(id).subscribe(
       {
         next: proData => {
-          console.log(`Project found: ${proData}:  ${JSON.stringify(proData)}`);
           this.projectFound = proData},
         error: error => console.error(error),
         complete: () => console.info("Project found!")
@@ -47,7 +45,6 @@ export class ProjectsComponent implements OnInit {
   // ### CREATE
 
   submitNewProjectForm(){
-    console.log(this.project);
     this.commitProject();
   };
 
@@ -55,7 +52,6 @@ export class ProjectsComponent implements OnInit {
     this.proServ.createProject(this.project).subscribe(
       {
         next: proData => {
-          console.log(`create-project: ${proData}`);
           this.redirectProject();},
         error: error => console.error(error),
         complete: () => console.info("New project created")
@@ -66,7 +62,6 @@ export class ProjectsComponent implements OnInit {
   // ### PUT : 
 
   putProjectID(id: number){
-    console.log(id);
     this.findProjectByID(id);
   }
 
@@ -74,7 +69,6 @@ export class ProjectsComponent implements OnInit {
     this.proServ.putProject(this.projectFound).subscribe(
       {
         next: proData => {
-          console.log(`Project to put: ${proData}`);
           this.redirectProject();},
         error: error => console.error(error),
         complete: () => console.info("Project patched!")
@@ -85,7 +79,6 @@ export class ProjectsComponent implements OnInit {
   // ### DELETE : 
 
   delProjectID(id: number){
-    console.log(id);
     this.findProjectByID(id);
   }
 
@@ -93,7 +86,6 @@ export class ProjectsComponent implements OnInit {
     this.proServ.deleteProject(this.projectFound.id!).subscribe(
       {
       next: proData => {
-        console.log(`Project to delete: ${proData}`);
         this.redirectProject();},
       error: error => console.error(error),
       complete: () => console.info("Project deleted!")
