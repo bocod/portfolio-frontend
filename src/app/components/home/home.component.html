@@ -1,32 +1,40 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
-    <h1>Portfolio APP</h1>
-    <div id="carouselExampleCaptions" class="carousel slide col-lg-6 m-auto mb-3" data-bs-ride="false">
+    <h1>Portfolio SPA</h1>
+    <div id="carouselExampleCaptions" class="carousel slide col-lg-6 m-auto mb-3" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" class="d-block w-100" alt="...">
+          <div class="carousel-item active" data-bs-interval="5000">
+            <img src="../../../assets/img/homeImages/stack-mvc-dark.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>See my work</h5>
-              <p>Some representative projects representing my style.</p>
+              <h5>PORTFOLIO PROJECT</h5>
+              <p>This project was developed as part of the final training course for Argentina Programa, using Angular, Spring Boot, MySQL</p>
             </div>
           </div>
-          <div class="carousel-item">
-            <img src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Check my profile</h5>
-              <p>If you'd like to look deeper, check my studies, courses and certifications.</p>
+          <div class="carousel-item" data-bs-interval="5000">
+            <img src="../../../assets/img/homeImages/project-movie.gif" class="d-block w-100" alt="..." style="opacity: 0.1;">
+            <div class="carousel-caption d-none d-md-block text-dark">
+              <h5>Main idea</h5>
+              <p>It is a resume of my profile as developer. It imitates the LinkedIn profile view, but developed by me and fully customizable.</p>
             </div>
           </div>
-          <div class="carousel-item">
-            <img src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+          <div class="carousel-item" data-bs-interval="5000">
+            <img src="../../../assets/img/homeImages/human_evolution.jpeg" class="d-block w-100" alt="..." style="opacity: 0.1;">
+            <div class="carousel-caption d-none d-md-block text-dark">
+              <h5>Philosophy</h5>
+              <p>I believe people are as dynamic as the environment they are inmersed into. Roadmaps are guides but they are not written on stone, is with this spirit that I believe it is not important the time it took a person to finish a study but the lessons learned, the people met, and the footprints left. That's why, among other details, in the skills component I used an animated progress bar to reveal them as dynamic and trainable.</p>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="5000">
+            <img src="https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ" class="d-block w-100" alt="..." style="opacity: 0.2;">
+            <div class="carousel-caption d-none d-md-block text-dark">
               <h5>Reach me!</h5>
-              <p>Have some questions? Feel free to send my a message.</p>
+              <p>If you have comments, questions, congratulations, doubts, please feel free to contact me! I would be glad to hear from you!</p>
             </div>
           </div>
         </div>
@@ -35,12 +43,23 @@
           <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="carousel-control-next-icon text-primary" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-    <div class="d-flex justify-content-evenly col-lg-6 m-auto">
-        <button type="button" [routerLink]="['/profile']" class="btn btn-outline-primary">Check my profile</button>
-        <button type="button" class="btn btn-outline-secondary">Contact me!</button>
+    <div class="d-flex justify-content-evenly align-items-start col-lg-6 m-auto">
+        <button type="button" [routerLink]="['/profile']" class="btn btn-primary">Profile</button>
+
+        <div>
+          <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="collapse" data-bs-target="#collapseSocial" aria-expanded="false" aria-controls="collapseExample" style="width: 200px;">Contact me...</button>
+          <div class="collapse" id="collapseSocial">
+              <div class="card card-body d-flex flex-row justify-content-end mt-1 p-0" style="border-width: 0;">
+              <a href="https://www.linkedin.com/in/agustinboccio/" target="_blank" class="btn btn-light ms-2"><i class="bi bi-linkedin"></i></a>
+              <a href="https://github.com/bocod" target="_blank" class="btn btn-light ms-2"><i class="bi bi-github"></i></a>
+              <a href="https://twitter.com/agboccio" target="_blank" class="btn btn-light ms-2"><i class="bi bi-twitter"></i></a>
+              <a href="mailto:{{myProfile}}?subject=Nice Portfolio!&body=Hi, I loved your work with the Portfolio App!" target="_blank" class="btn btn-light ms-2"><i class="bi bi-envelope-fill"></i></a>
+              </div>
+          </div>
+      </div>
     </div>
 </div>

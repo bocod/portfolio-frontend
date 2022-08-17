@@ -30,6 +30,11 @@
         <p *ngIf="Password?.hasError('minlength')" class="text-danger"><sup>*</sup> Password must have more than 8 characters</p>
     </div>
 
+
+    <div *ngIf="backendErrors">
+        <p class="text-danger text-center"><strong>Invalid credentials</strong></p>
+    </div>
+
     <div class="text-center mb-3">
         <button class="btn btn-primary w-50" type="submit">Login</button>
     </div>

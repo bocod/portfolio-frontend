@@ -24,6 +24,11 @@ export class ProfileHeaderComponent implements OnInit {
   
   userLogged = this.authenticatorService.IsLogged;
 
+  scrollTo(fragment:any){
+    const element = document.querySelector(`#${fragment}`);
+    element?.scrollIntoView();
+  }
+
   ngOnInit(): void {
     this.profServ.getData().subscribe( 
       {

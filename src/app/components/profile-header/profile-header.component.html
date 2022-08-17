@@ -31,15 +31,35 @@
 
                 <p class="mb-0">{{profile.subtitle}}</p>
 
-                <p class="mb-0">{{profile.location}}</p>
-                <p class="mb-0"><a href="">{{profile.contact}}</a></p>
+                <p class="mb-0"><i class="bi bi-geo-alt-fill"></i> {{profile.location}}</p>
             </div>
 
-            <button type="button" class="btn btn-primary me-2">Interests</button>
-            <button type="button" class="btn btn-outline-secondary me-2">
-                Add Section
-            </button>
-            <button type="button" class="btn btn-outline-secondary me-2">More...</button>
+            <div class="d-flex">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle me-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sections
+                    </button>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="scrollTo('about')">About</a></li>
+                    <li><a class="dropdown-item"  (click)="scrollTo('experience')">Experience</a></li>
+                    <li><a class="dropdown-item"  (click)="scrollTo('education')">Education</a></li>
+                    <li><a class="dropdown-item"  (click)="scrollTo('skills')">Skills</a></li>
+                    <li><a class="dropdown-item"  (click)="scrollTo('projects')">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="collapse" data-bs-target="#collapseSocial" aria-expanded="false" aria-controls="collapseExample">Contact me...</button>
+                    <div class="collapse" id="collapseSocial">
+                        <div class="card card-body d-flex flex-row justify-content-end mt-1 p-0" style="border-width: 0;">
+                        <a href="https://www.linkedin.com/in/agustinboccio/" target="_blank" class="btn btn-light ms-2"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://github.com/bocod" target="_blank" class="btn btn-light ms-2"><i class="bi bi-github"></i></a>
+                        <a href="https://twitter.com/agboccio" target="_blank" class="btn btn-light ms-2"><i class="bi bi-twitter"></i></a>
+                        <a href="mailto:{{profile.contact}}?subject=Nice Portfolio!&body=Hi, I loved your work with the Portfolio App!" target="_blank" class="btn btn-light ms-2"><i class="bi bi-envelope-fill"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!-- alma mater info -->
         <div class="d-flex flex-column justify-content-center pe-3 mt-2 mt-md-0">

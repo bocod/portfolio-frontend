@@ -10,6 +10,7 @@ import { AuthenticatorService } from 'src/app/services/authenticator.service';
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
+  backendErrors: any;
 
   constructor(private formBuilder:FormBuilder, private authenticatorService: AuthenticatorService, private route:Router) { 
     this.loginForm = this.formBuilder.group(
@@ -36,11 +37,16 @@ export class LoginComponent implements OnInit {
   onSubmit(event:Event) 
   {
     event.preventDefault;
-    this.authenticatorService.Login(this.loginForm.value).subscribe(data => {
-      console.log("DATA: " + JSON.stringify(data));
-
-      this.route.navigate(['/profile']);
-      
-    })
+    this.authenticatorService.Login(this.loginForm.value).subscribe(
+      {
+        next: data => {
+          console.log(`Profile found: ${data}:  ${JSON.stringify(data)}`);
+          this.route.navigate(['/profile'])},
+        error: error => {
+          console.error(error)
+          this.backendErrors = error},
+        complete: () => console.info("Profile found!")
+      }
+    )
   }
 }
