@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
 import { EducationComponent } from './components/education/education.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { EducationComponent } from './components/education/education.component';
     ProjectsComponent,
     LoginComponent,
     ProfileComponent,
-    EducationComponent
+    EducationComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
