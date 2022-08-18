@@ -7,7 +7,7 @@ import { Project } from 'src/app/classes/project';
   providedIn: 'root'
 })
 export class ProjectsService {
-  url: string = "http://localhost:8080/projects";
+  url: string = "https://fast-scrubland-71875.herokuapp.com/projects";
 
   constructor(private http: HttpClient) { }
 

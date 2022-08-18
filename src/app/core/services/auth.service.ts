@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  apiurl = 'http://localhost:8080/login';
+  apiurl = 'https://fast-scrubland-71875.herokuapp.com/login';
   token: any;
 
   constructor(private http: HttpClient, private router: Router) { }

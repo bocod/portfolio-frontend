@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticatorService {
-  url = "http://localhost:8080/auth/login";
+  url = "https://fast-scrubland-71875.herokuapp.com/auth/login";
   currentUserSubject: BehaviorSubject<any>;
 
   constructor(private http:HttpClient) { 

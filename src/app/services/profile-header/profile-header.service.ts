@@ -7,7 +7,7 @@ import { Profile } from 'src/app/classes/profile';
   providedIn: 'root'
 })
 export class ProfileHeaderService {
-  url:string = "http://localhost:8080/profile";
+  url:string = "https://fast-scrubland-71875.herokuapp.com/profile";
 
   constructor(private http:HttpClient) { }
 

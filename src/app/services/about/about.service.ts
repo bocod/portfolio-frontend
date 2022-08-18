@@ -7,7 +7,7 @@ import { About } from 'src/app/classes/about';
   providedIn: 'root'
 })
 export class AboutService {
-  url: string = "http://localhost:8080/about";
+  url: string = "https://fast-scrubland-71875.herokuapp.com/about";
 
   constructor(private http:HttpClient) { }
 

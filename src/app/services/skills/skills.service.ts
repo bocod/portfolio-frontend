@@ -8,7 +8,7 @@ import { Skill } from 'src/app/classes/skill';
 })
 export class SkillsService {
 
-  url: string = "http://localhost:8080/skills";
+  url: string = "https://fast-scrubland-71875.herokuapp.com/skills";
 
   constructor(private http: HttpClient) { }
 
