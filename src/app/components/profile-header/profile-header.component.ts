@@ -1,10 +1,14 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Education } from 'src/app/classes/education';
+import { PicFile } from 'src/app/classes/file';
 import { Profile } from 'src/app/classes/profile';
 import { AuthenticatorService } from 'src/app/services/authenticator.service';
 import { EducationService } from 'src/app/services/education/education.service';
 import { ProfileHeaderService } from 'src/app/services/profile-header/profile-header.service';
+import { UploadService } from 'src/app/services/upload/upload.service';
 
 @Component({
   selector: 'app-profile-header',
@@ -19,8 +23,16 @@ export class ProfileHeaderComponent implements OnInit {
   profFound: any;
   profile: Profile = new Profile;
 
+  // UPLOAD IMAGE VARS
+  selectedFiles?: FileList;
+  currentFile?: File;
+  progress = 0;
+  message = '';
+  fileInfo?: Observable<any>;
+  dbImages: PicFile[] | undefined;
+
   
-  constructor(private profServ: ProfileHeaderService, private eduServ: EducationService, private authenticatorService: AuthenticatorService, private router: Router) { }
+  constructor(private profServ: ProfileHeaderService, private eduServ: EducationService, private authenticatorService: AuthenticatorService, private router: Router, private uploadServ: UploadService) { }
   
   userLogged = this.authenticatorService.IsLogged;
 
@@ -47,7 +59,23 @@ export class ProfileHeaderComponent implements OnInit {
         complete: () => console.info("Education found!")
       }
     )
-    
+
+    this.uploadServ.getFiles().subscribe( 
+      {
+        next: files => {
+          console.log(files);
+
+          this.dbImages = files;
+          console.log(JSON.parse(JSON.stringify(this.fileInfo)));
+          console.log(this.fileInfo);
+        },
+        error: error => console.error(error),
+        complete: () => console.info("Files found!")
+      }
+    );
+
+    this.fileInfo = this.uploadServ.getFiles();
+
   }
 
   findProfileByID(id: number){
@@ -119,5 +147,48 @@ export class ProfileHeaderComponent implements OnInit {
     this.redirectTo("/profile");
   }
 
+
+  // FILE CRUD METHODS
+
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
+  }
+
+  upload(): void {
+    this.progress = 0;
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      if (file) {
+        this.currentFile = file;
+        this.uploadServ.upload(this.currentFile).subscribe({
+          next: (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              this.progress = Math.round(100 * event.loaded / event.total);
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.message;
+              this.fileInfo = this.uploadServ.getFiles();
+            }
+          },
+          error: (err: any) => {
+            console.log(err);
+            this.progress = 0;
+            if (err.error && err.error.message) {
+              this.message = err.error.message;
+            } else {
+              this.message = 'Could not upload the file!';
+            }
+            this.currentFile = undefined;
+          }
+        });
+      }
+      this.selectedFiles = undefined;
+    }
+  }
+
+  deleteFile(filename: string){
+    this.uploadServ.deleteFile(filename).subscribe( res => {
+      this.fileInfo = this.uploadServ.getFiles();
+    })
+  }
 
 }
